@@ -32,9 +32,7 @@ class App extends React.Component {
         });
     }
 
-    onFormSubmit(e){
-        e.preventDefault();
-
+    onFormSubmit(){
         getCurrentWeather(this.state.location)
         .then((res) =>{
           this.setState({
@@ -53,8 +51,11 @@ class App extends React.Component {
                     <SearchBar 
                         location={this.state.location} 
                         inputChange={(e)=> this.onInputChange(e)}
+                        formSubmitted={()=> this.onFormSubmit()}
                     />
-                    <CurrentWeather />
+                    <CurrentWeather 
+                        currentTemp={this.state.temp}
+                    />
                 </header>
             </div>
         );
