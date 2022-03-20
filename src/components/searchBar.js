@@ -5,39 +5,27 @@ import {getCurrentWeather} from '../apis/open-weather-app';
 class SearchBar extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            location: '', 
-        }; 
-
-        // getCurrentWeather('Tokyo').then((res)=> {
-        //     console.log('res', res);
-        // })
-
-        // setInterval(()=>{
-        //     this.setState({
-        //         location:'my new value'
-        //     })
-        // }, 1000)
 
     }
 
     onInputChange(e){
-        this.setState({
-            location: e.target.value
-        });
+        this.props.inputChange(e);
     }
 
     onFormSubmit(e){
         e.preventDefault();
+        this.props.formSubmitted();
         
     }
 
     render(){
-        const location = this.state.location;
+        const location = this.props.location;
+        
 
         return(
+            <div>
             <form onSubmit={(e)=> this.onFormSubmit(e)}>
-                <button type= 'submit'>Search</button>
+                <button type= 'submit'>Current Weather Search</button>
                 <input
                  id='search' 
                  name='search' 
@@ -45,6 +33,9 @@ class SearchBar extends React.Component {
                  onChange={(e) => this.onInputChange(e)}
                  ></input>
             </form>
+
+            </div>
+            
         );
     }
 
