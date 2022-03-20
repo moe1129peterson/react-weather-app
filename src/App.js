@@ -1,21 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-import SearchBar from './components/searchBar'
-import CurrentWeather from './components/current-weather';
-import {getCurrentWeather} from './apis/open-weather-app';
 import React from 'react';
 
+import './App.css';
+
+import SearchBar from './components/searchBar'
+import CurrentWeather from './components/current-weather';
+import Forecast from './components/forecast-weather';
+
+import {getCurrentWeather,getForecast} from './apis/open-weather-app';
 
 class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            date:'',
             location: '',
-            temp: ''
+            temp: '',
+            description: '',
+            icon: '',
+            dailyForecast: []
         }; 
 
-        // getCurrentWeather('Tokyo').then((res)=> {
-        //     console.log('res', res);
+        // getCurrentWeather('Tokyo').then((weatherRes)=> {
+        //     console.log('weatherRes', weatherRes);
         // })
 
         // setInterval(()=>{
@@ -32,16 +38,32 @@ class App extends React.Component {
         });
     }
 
-    onFormSubmit(){
-        getCurrentWeather(this.state.location)
-        .then((res) =>{
-          this.setState({
-              temp: res.data.main.temp,
-          });
+    async onFormSubmit(){
+      const weatherRes = await getCurrentWeather(this.state.location)
+      const lat = weatherRes.data.coord.lat;
+      const lon = weatherRes.data.coord.lon;
+      const forecastRes= await getForecast(lat,lon);
 
-        });
+      this.setState({
+        date: weatherRes.data.dt,
+        temp: weatherRes.data.main.temp,
+        description: weatherRes.data.weather[0].main,
+        icon: weatherRes.data.weather[0].icon,
+        dailyForecast: forecastRes.data.daily
+      });
+
+    };
         
-    }
+
+
+
+        //   this.setState({
+        //       temp: weatherRes.data.main.temp,
+        //       description: weatherRes.data.weather[0].main,
+        //       icon: weatherRes.data.weather[0].icon
+        //   });
+
+    
 
 
     render(){
@@ -54,8 +76,12 @@ class App extends React.Component {
                         formSubmitted={()=> this.onFormSubmit()}
                     />
                     <CurrentWeather 
+                        currentDate={this.state.dt}
                         currentTemp={this.state.temp}
+                        description={this.state.description}
+                        icon={this.state.icon}
                     />
+                    <Forecast forecast={this.state.dailyForecast}/>
                 </header>
             </div>
         );
