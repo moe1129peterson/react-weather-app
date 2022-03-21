@@ -12,7 +12,7 @@ class App extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            date:'',
+            dt:'',
             location: '',
             temp: '',
             description: '',
@@ -45,7 +45,7 @@ class App extends React.Component {
       const forecastRes= await getForecast(lat,lon);
 
       this.setState({
-        date: weatherRes.data.dt,
+        dt: weatherRes.data.dt,
         temp: weatherRes.data.main.temp,
         description: weatherRes.data.weather[0].main,
         icon: weatherRes.data.weather[0].icon,
