@@ -1,0 +1,13 @@
+button {
+    margin-right: 10px;
+    background-color: #61DBFB;
+    height: 2rem;
+    border: none;
+    border-radius: 5px;
+}
+
+input {
+    height: 2rem;
+    border: none;
+    border-radius: 5px;
+}

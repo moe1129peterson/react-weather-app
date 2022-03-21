@@ -1,5 +1,6 @@
 import React from 'react';
 import {getCurrentWeather} from '../apis/open-weather-app';
+import classes from './searchBar.css';
 
 
 class SearchBar extends React.Component {
