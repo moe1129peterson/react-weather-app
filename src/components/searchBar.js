@@ -25,7 +25,7 @@ class SearchBar extends React.Component {
         return(
             <div>
             <form onSubmit={(e)=> this.onFormSubmit(e)}>
-                <button type= 'submit'>Current Weather Search</button>
+                <button type= 'submit'>Weather Search</button>
                 <input
                  id='search' 
                  name='search' 
