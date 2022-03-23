@@ -9,8 +9,8 @@ class Forecast extends React.Component{
             <div className='forecast-card'>-----
                 <p className='forecast-daily'>{date}</p>
                 <p className='forecast-temp'>{f.temp.day}</p>
-                <img src={url} alt={f.weather[0].icon} />
                 <p className='forecast-description'>{f.weather[0].main}</p>
+                <img src={url} alt={f.weather[0].icon} />
             </div>
     
         )

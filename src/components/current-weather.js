@@ -10,7 +10,7 @@ class CurrentWeather extends React.Component{
             <div className='current-weather'>
                 <div className='current-weather-card'>
                     <p className='current-weather-time'>{currenttime}</p>
-                    <p className='current-weather-temp'>{this.props.currentTemp}</p>
+                    <p className='current-weather-temp'>{this.props.currentTemp} </p>
                     <p className='current-weather-description'>{this.props.description}</p>
                     <img 
                         className='current-weather-icon' 
